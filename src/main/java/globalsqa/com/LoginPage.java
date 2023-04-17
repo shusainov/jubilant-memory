@@ -13,7 +13,7 @@ public class LoginPage extends BasePage {
     @Step("Выбор пользователя {userName}")
     public static void selectUser(String userName) {
         String selectLocator = "//select";
-        Select select = new Select(new WebDriverWait(driver, Duration.ofMillis(DEFAULT_WAIT_TIMEOUT_MS))
+        Select select = new Select(driverWait
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(selectLocator))));
         select.selectByVisibleText(userName);
     }

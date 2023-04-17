@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static helpers.CustomFile.getFileInputStream;
+
 public class UiTest extends BaseTest {
 
     @Test
@@ -58,21 +60,10 @@ public class UiTest extends BaseTest {
         Assertions.assertTrue(isDepositExist);
 
         String filePath = "csvFile.csv";
-        CustomFile.writeTableValuesToFile(filePath, table.stream()
-                .map(m -> {
-                            Map<String, String> result = new HashMap<>(m);
-                            result.put("Date-Time",
-                                    CustomDate.convertDate(m.get("Date-Time"), "MMM d, yyyy hh:mm:ss a", new Locale("en", "US"),
-                                            "dd MMMM yyyy hh:mm:ss"));
-                            return result;
-                        }
-                ).collect(Collectors.toList()));
+        CustomFile.writeTableValuesToFile(filePath, Other.convertDatesOnColumn(table, "Date-Time",
+                "MMM d, yyyy hh:mm:ss a", "dd MMMM yyyy HH:mm:ss",
+                new Locale("en", "US")));
 
-        try {
-            Allure.addAttachment("сsv файл", new FileInputStream(filePath));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
+        Allure.addAttachment("сsv файл", getFileInputStream(filePath));
     }
 }

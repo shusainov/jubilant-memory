@@ -14,7 +14,7 @@ public class UserPage extends BasePage {
     @Step("Вставить {text} в поле ввода")
     public static void writeToInputWithLabel(String labelText, String text) {
         String inputLocator = "//label[text()='%s']/following-sibling::input";
-        WebElement input = (new WebDriverWait(driver, Duration.ofMillis(DEFAULT_WAIT_TIMEOUT_MS)))
+        WebElement input = driverWait
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(inputLocator, labelText))));
         input.sendKeys(text);
     }
@@ -22,7 +22,7 @@ public class UserPage extends BasePage {
     @Step("Получение значения {labelText}")
     public static String getFieldValue(String labelText) {
         String paramsFieldElementLocator = "//div[contains(text(),'Account Number')]";
-        WebElement paramsEl = (new WebDriverWait(driver, Duration.ofMillis(DEFAULT_WAIT_TIMEOUT_MS)))
+        WebElement paramsEl = driverWait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(paramsFieldElementLocator)));
 
         String[] namesAndValues = paramsEl.getText().split("[:,]");

@@ -17,7 +17,7 @@ public class TransactionsPage extends BasePage {
 
     public static int getTableRowsCount() {
         String tableLocator = "//table";
-        WebElement tableEl = (new WebDriverWait(driver, Duration.ofMillis(DEFAULT_WAIT_TIMEOUT_MS)))
+        WebElement tableEl = driverWait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(tableLocator)));
         String rowsLocator = "//tbody//tr";
         return tableEl.findElements(By.xpath(rowsLocator)).size();
@@ -25,7 +25,7 @@ public class TransactionsPage extends BasePage {
 
     public static List<Map<String, String>> getTableValues() {
         String tableLocator = "//table";
-        WebElement tableEl = (new WebDriverWait(driver, Duration.ofMillis(DEFAULT_WAIT_TIMEOUT_MS)))
+        WebElement tableEl = driverWait
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(tableLocator)));
 
         String headersLocator = ".//thead//td";

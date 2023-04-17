@@ -1,5 +1,9 @@
 package helpers;
 
+import io.qameta.allure.Allure;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,5 +23,15 @@ public class CustomFile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static FileInputStream getFileInputStream(String filePath) {
+        FileInputStream result;
+        try {
+            result = new FileInputStream(filePath);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 }
